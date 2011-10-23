@@ -14,6 +14,10 @@
         <module>Server</module>
         <module>Client</module>
     </modules> 
+
+    <scm>
+        <connection>https://bur.googlecode.com/svn/trunk</connection>
+    </scm>
    
     <build>
         <pluginManagement>
