@@ -3,6 +3,7 @@ package com.bursa.server;
 import java.util.ArrayList;
 
 import com.bursa.interfata.Share;
+import com.bursa.interfata.Share.OfferType;
 import com.bursa.interfata.Transaction;
 
 public interface DataManager {
@@ -19,7 +20,7 @@ public interface DataManager {
 	 * @param type
 	 * @return
 	 */
-	public ArrayList<Share> getShares(String type) ;
+	public ArrayList<Share> getShares(OfferType type) ;
 
 	/**
 	 * Modify an existing share.

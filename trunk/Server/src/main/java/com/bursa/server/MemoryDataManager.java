@@ -3,6 +3,7 @@ package com.bursa.server;
 import java.util.ArrayList;
 
 import com.bursa.interfata.Share;
+import com.bursa.interfata.Share.OfferType;
 import com.bursa.interfata.Transaction;
 import com.bursa.server.objectIdentifier.ShareIdentifier;
 import com.bursa.server.objectIdentifier.TransactionIdentifier;
@@ -23,12 +24,17 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
-	public ArrayList<Share> getShares(String type) {
+	public ArrayList<Share> getShares(OfferType type) {
 		ArrayList<Share> result = new ArrayList<Share>();
 		
 		for (ShareIdentifier s:shares) {
-			//if (s.getType()
+			OfferType offer = s.getType();
+			
+			if (offer.compareTo(type) == 0) {
+				result.add(s.getShare());
+			}
 		}
+
 		return result;
 	}
 
