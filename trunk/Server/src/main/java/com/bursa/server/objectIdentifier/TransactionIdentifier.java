@@ -1,4 +1,4 @@
-package com.bursa.server;
+package com.bursa.server.objectIdentifier;
 
 import com.bursa.interfata.Transaction;
 
@@ -8,11 +8,16 @@ public class TransactionIdentifier {
 	
 	private Transaction transaction;
 	
-	public TransactionIdentifier () {
+	public TransactionIdentifier (Transaction t) {
+		this.transaction = t;
 		transactionId = incrementId(); 
 	}
 	
 	private static int incrementId(){
 		return ++id;
+	}
+	
+	public int getId() {
+		return transactionId;
 	}
 }
