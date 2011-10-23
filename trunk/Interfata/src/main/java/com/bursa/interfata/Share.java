@@ -2,10 +2,27 @@ package com.bursa.interfata;
 
 public class Share {
 	
-	private String type;		// sell or buy
+	public enum OfferType {
+		SELL,
+		BUY
+	}
+	
+	private OfferType type;		// sell or buy
 	private String company;		// the name of the company
 	private int number;			// the number of shares
 	private int value;			// the value of one share
-	private int clientId;		// who is selling/ buying
+	
+
+	public Share(OfferType type, String company, int number, int value) {
+		this.type = type;
+		this.company = company;
+		this.number = number;
+		this.value = value;
+	}
+
+
+	public OfferType getType() {
+		return this.type;
+	}
 	
 }

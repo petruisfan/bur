@@ -4,6 +4,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import com.bursa.interfata.Share.OfferType;
+
 
 public interface Interfata extends Remote{
     public String hello() throws RemoteException;
@@ -25,7 +27,7 @@ public interface Interfata extends Remote{
      * @return
      * @throws RemoteException
      */
-    public ArrayList<Share> getShares(String type) throws RemoteException;
+    public ArrayList<Share> getShares(OfferType type) throws RemoteException;
     
     /**
      * Modify the share object on the server
