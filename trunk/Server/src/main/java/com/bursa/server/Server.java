@@ -9,11 +9,14 @@ import com.bursa.interfata.Share;
 import com.bursa.interfata.Transaction;
 
 public class Server extends UnicastRemoteObject implements Interfata{
-
     private static final long serialVersionUID = 1536781879666827889L;
 
+    // 
+    private DataManager dm;
+    
     public Server() throws RemoteException {
         super();
+        dm = new MemoryDataManager();
     }
 
     public String hello() throws RemoteException {
@@ -21,23 +24,23 @@ public class Server extends UnicastRemoteObject implements Interfata{
     }
 
 	public boolean postShare(Share share) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = dm.addShare(share);
+		return result;
 	}
 
 	public ArrayList<Share> getShares(String type) throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Share> result = dm.getShares(type);
+		return result;
 	}
 
 	public boolean modifyShare(Share share) throws RemoteException {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = dm.modifyShare(share);
+		return result;
 	}
 
 	public ArrayList<Transaction> getTransaction() throws RemoteException {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Transaction> result = dm.getTransactions();
+		return result;
 	}
     
 }
