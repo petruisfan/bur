@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.bursa.interfata.Interfata;
 import com.bursa.interfata.Share;
+import com.bursa.interfata.Share.OfferType;
 import com.bursa.interfata.Transaction;
 
 public class Server extends UnicastRemoteObject implements Interfata{
@@ -28,7 +29,7 @@ public class Server extends UnicastRemoteObject implements Interfata{
 		return result;
 	}
 
-	public ArrayList<Share> getShares(String type) throws RemoteException {
+	public ArrayList<Share> getShares(OfferType type) throws RemoteException {
 		ArrayList<Share> result = dm.getShares(type);
 		return result;
 	}
