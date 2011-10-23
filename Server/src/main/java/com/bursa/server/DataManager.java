@@ -34,4 +34,11 @@ public interface DataManager {
 	 * @return
 	 */
 	public ArrayList<Transaction> getTransactions() ;
+	
+	/**
+	 * Add a transcation to the list of transactions;
+	 * @param t
+	 * @return
+	 */
+	public boolean addTransaction(Transaction t);
 }
