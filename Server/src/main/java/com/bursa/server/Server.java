@@ -4,12 +4,12 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import com.bursa.interfata.Interfata;
+import com.bursa.interfata.StockServer;
 import com.bursa.interfata.Share;
 import com.bursa.interfata.Share.OfferType;
 import com.bursa.interfata.Transaction;
 
-public class Server extends UnicastRemoteObject implements Interfata{
+public class Server extends UnicastRemoteObject implements StockServer{
     private static final long serialVersionUID = 1536781879666827889L;
 
     // Intermediate layer for comunicating with the data objects.
