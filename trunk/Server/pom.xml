@@ -13,6 +13,21 @@
 
     <name>Server</name>
 
+    <build>
+        <plugins>
+            <plugin>   
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.bursa.MainServer</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
           <groupId>Bursa</groupId>
