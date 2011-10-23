@@ -8,8 +8,6 @@ import com.bursa.interfata.Share.OfferType;
 
 
 public interface StockServer extends Remote{
-    public String hello() throws RemoteException;
-    
     /**
      * Post a new share transaction (selling/buying).
      * @param type

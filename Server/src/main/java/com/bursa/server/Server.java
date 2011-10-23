@@ -15,13 +15,9 @@ public class Server extends UnicastRemoteObject implements StockServer{
     // Intermediate layer for comunicating with the data objects.
     private DataManager dm;
     
-    public Server() throws RemoteException {
+    public Server(DataManager dm2) throws RemoteException {
         super();
-        dm = new MemoryDataManager();
-    }
-
-    public String hello() throws RemoteException {
-        return "Hello";
+        dm = dm2;
     }
 
 	public boolean postShare(Share share) throws RemoteException {
