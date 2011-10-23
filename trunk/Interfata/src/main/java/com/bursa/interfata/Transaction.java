@@ -9,11 +9,21 @@ public class Transaction {
 
 	
 	public Transaction(int sellerId, int buyerId, String company, int value,int number) {
+		assert company != null && !company.equals("");
+		assert value>0 && number>0;
+		
 		this.sellerId = sellerId;
 		this.buyerId = buyerId;
 		this.company = company;
 		this.value = value;
 		this.number = number;
 	}
+
+	public int getSellerId(){
+		return this.sellerId;
+	}
 	
+	public int getBuyerId() {
+		return this.buyerId;
+	}
 }

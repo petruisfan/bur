@@ -8,6 +8,7 @@ import com.bursa.interfata.Transaction;
 import com.bursa.server.objectIdentifier.ShareIdentifier;
 import com.bursa.server.objectIdentifier.TransactionIdentifier;
 
+
 public class MemoryDataManager implements DataManager {
 	private ArrayList<ShareIdentifier> shares;
 	private ArrayList<TransactionIdentifier> transactions;
@@ -26,7 +27,6 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
-	// TODO: unit test
 	public ArrayList<Share> getShares(OfferType type) {
 		ArrayList<Share> result = new ArrayList<Share>();
 		
@@ -58,4 +58,12 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
+	public boolean addTransaction(Transaction t) {
+		boolean result = false;
+		
+		TransactionIdentifier tran = new TransactionIdentifier(t);
+		result = transactions.add(tran);
+		
+		return result;
+	}
 }
