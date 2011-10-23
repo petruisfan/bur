@@ -63,7 +63,7 @@ public class MemoryDataManagerTest {
 
 		for (int i=0; i<15; i++) {
 			Transaction t = result.get(i);
-			assertEquals(t.getSellerId(),i+23);
+			assertEquals(t.getSellerId(),39-i);
 		}
 	}
 	
