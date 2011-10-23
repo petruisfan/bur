@@ -12,6 +12,8 @@ public class MemoryDataManager implements DataManager {
 	private ArrayList<ShareIdentifier> shares;
 	private ArrayList<TransactionIdentifier> transactions;
 	
+	// how many transactions does getTransaction() return.
+	private int transactionCount = 15;
 	
 	public MemoryDataManager() {
 		this.shares = new ArrayList<ShareIdentifier>();
@@ -24,6 +26,7 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
+	// TODO: unit test
 	public ArrayList<Share> getShares(OfferType type) {
 		ArrayList<Share> result = new ArrayList<Share>();
 		
@@ -43,9 +46,16 @@ public class MemoryDataManager implements DataManager {
 		return false;
 	}
 
+	// TODO: unit test
 	public ArrayList<Transaction> getTransactions() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Transaction> result = new ArrayList<Transaction>();
+		
+		for (int i=transactions.size()-1, j=0; i>0 && j<transactionCount; j++, i--) {
+			Transaction tr = transactions.get(i).getTransaction();
+			result.add (tr);
+		}
+		
+		return result;
 	}
 
 }

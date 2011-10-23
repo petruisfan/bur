@@ -20,4 +20,8 @@ public class TransactionIdentifier {
 	public int getId() {
 		return transactionId;
 	}
+
+	public Transaction getTransaction() {
+		return this.transaction;
+	}
 }
