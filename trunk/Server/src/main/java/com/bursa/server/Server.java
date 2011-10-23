@@ -12,7 +12,7 @@ import com.bursa.interfata.Transaction;
 public class Server extends UnicastRemoteObject implements Interfata{
     private static final long serialVersionUID = 1536781879666827889L;
 
-    // 
+    // Intermediate layer for comunicating with the data objects.
     private DataManager dm;
     
     public Server() throws RemoteException {

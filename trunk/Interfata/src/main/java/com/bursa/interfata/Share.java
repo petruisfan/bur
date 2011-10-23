@@ -14,6 +14,11 @@ public class Share {
 	
 
 	public Share(OfferType type, String company, int number, int value) {
+		assert(number > 0);
+		assert(value > 0);
+		assert(type != null);
+		assert(company != null);
+		
 		this.type = type;
 		this.company = company;
 		this.number = number;
