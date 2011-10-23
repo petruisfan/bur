@@ -67,4 +67,10 @@ public class MemoryDataManagerTest {
 		}
 	}
 	
+	@Test
+	public void testGetTransactionNull() {
+		ArrayList<Transaction> result = dm.getTransactions();
+		
+		assertEquals(result.size(),0);
+	}
 }
