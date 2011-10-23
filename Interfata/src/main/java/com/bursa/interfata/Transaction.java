@@ -19,11 +19,30 @@ public class Transaction {
 		this.number = number;
 	}
 
-	public int getSellerId(){
-		return this.sellerId;
+
+	public int getSellerId() {
+		return sellerId;
 	}
-	
+
+
 	public int getBuyerId() {
-		return this.buyerId;
+		return buyerId;
 	}
+
+
+	public String getCompany() {
+		return company;
+	}
+
+
+	public int getValue() {
+		return value;
+	}
+
+
+	public int getNumber() {
+		return number;
+	}
+
+	
 }

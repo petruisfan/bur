@@ -30,7 +30,24 @@ public class Share {
 
 
 	public OfferType getType() {
-		return this.type;
+		return type;
 	}
+
+
+	public String getCompany() {
+		return company;
+	}
+
+
+	public int getNumber() {
+		return number;
+	}
+
+
+	public int getValue() {
+		return value;
+	}
+
+
 	
 }
