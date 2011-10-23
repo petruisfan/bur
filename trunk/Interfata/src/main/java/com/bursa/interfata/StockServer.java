@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.bursa.interfata.Share.OfferType;
 
 
-public interface Interfata extends Remote{
+public interface StockServer extends Remote{
     public String hello() throws RemoteException;
     
     /**
