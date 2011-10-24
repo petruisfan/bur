@@ -13,7 +13,7 @@ public interface DataManager {
 	 * @param share
 	 * @return
 	 */
-	public boolean addShare(Share share) ;
+	public boolean addShare(Share share, int id) ;
 
 	/**
 	 * Get the list of shares of a certain type: sell or buy.
@@ -27,7 +27,7 @@ public interface DataManager {
 	 * @param share
 	 * @return
 	 */
-	public boolean modifyShare(Share share) ;
+	public boolean modifyShare(Share share, int id) ;
 
 	/**
 	 * Get a list of the last 15 transactions;

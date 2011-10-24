@@ -21,12 +21,14 @@ public class MemoryDataManager implements DataManager {
 		this.transactions = new ArrayList<TransactionIdentifier>();
 	}
 	
-	public boolean addShare(Share share) {
-		ShareIdentifier newShare = new ShareIdentifier(share);
+	
+	public boolean addShare(Share share, int id) {
+		ShareIdentifier newShare = new ShareIdentifier(share, id);
 		boolean result = shares.add(newShare);
 		return result;
 	}
 
+	
 	public ArrayList<Share> getShares(OfferType type) {
 		ArrayList<Share> result = new ArrayList<Share>();
 		
@@ -41,12 +43,13 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
-	public boolean modifyShare(Share share) {
+	
+	public boolean modifyShare(Share share, int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	// TODO: unit test
+	
 	public ArrayList<Transaction> getTransactions() {
 		ArrayList<Transaction> result = new ArrayList<Transaction>();
 		
@@ -58,6 +61,7 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
+	
 	public boolean addTransaction(Transaction t) {
 		boolean result = false;
 		

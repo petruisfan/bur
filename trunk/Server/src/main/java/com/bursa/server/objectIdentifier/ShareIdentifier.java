@@ -10,8 +10,9 @@ public class ShareIdentifier {
 	private final int shareId;	// unique id for each share action
 	private int clientId;		// who is selling/ buying
 	
-	public ShareIdentifier(Share s) {
+	public ShareIdentifier(Share s, int id2) {
 		this.share = s;
+		this.clientId = id2;
 		shareId = incrementId(); 
 	}
 	

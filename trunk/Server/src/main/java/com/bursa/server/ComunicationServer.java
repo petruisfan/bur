@@ -9,19 +9,21 @@ import com.bursa.interfata.Share;
 import com.bursa.interfata.Share.OfferType;
 import com.bursa.interfata.Transaction;
 
-public class Server extends UnicastRemoteObject implements StockServer{
+public class ComunicationServer extends UnicastRemoteObject implements StockServer{
     private static final long serialVersionUID = 1536781879666827889L;
 
     // Intermediate layer for comunicating with the data objects.
     private DataManager dm;
+	private int id;
     
-    public Server(DataManager dm2) throws RemoteException {
+    public ComunicationServer(DataManager dm2, int id2) throws RemoteException {
         super();
-        dm = dm2;
+        this.dm = dm2;
+        this.id = id2;
     }
 
 	public boolean postShare(Share share) throws RemoteException {
-		boolean result = dm.addShare(share);
+		boolean result = dm.addShare(share, id);
 		return result;
 	}
 
@@ -31,7 +33,7 @@ public class Server extends UnicastRemoteObject implements StockServer{
 	}
 
 	public boolean modifyShare(Share share) throws RemoteException {
-		boolean result = dm.modifyShare(share);
+		boolean result = dm.modifyShare(share, id);
 		return result;
 	}
 
