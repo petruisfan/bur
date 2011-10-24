@@ -5,7 +5,6 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 
 import com.bursa.server.MainServer;
-import com.bursa.server.Server;
 
 public class Main {
 

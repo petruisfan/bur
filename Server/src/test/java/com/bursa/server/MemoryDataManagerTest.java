@@ -26,10 +26,10 @@ public class MemoryDataManagerTest {
 		Share share3 = new Share(OfferType.SELL, "valies", 10, 3);
 		Share share4 = new Share(OfferType.BUY, "company", 10, 3);
 		
-		dm.addShare(share1);
-		dm.addShare(share2);
-		dm.addShare(share3);
-		dm.addShare(share4);
+		dm.addShare(share1, 10);
+		dm.addShare(share2, 10);
+		dm.addShare(share3, 10);
+		dm.addShare(share4, 10);
 		
 		ArrayList<Share> result = dm.getShares(OfferType.BUY);
 		
