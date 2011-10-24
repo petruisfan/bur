@@ -8,7 +8,10 @@ import com.bursa.interfata.Transaction;
 import com.bursa.server.objectIdentifier.ShareIdentifier;
 import com.bursa.server.objectIdentifier.TransactionIdentifier;
 
-
+/**
+ * Simulates the actions using objects from memory;
+ * @author petre
+ */
 public class MemoryDataManager implements DataManager {
 	private ArrayList<ShareIdentifier> shares;
 	private ArrayList<TransactionIdentifier> transactions;
