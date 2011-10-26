@@ -21,7 +21,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.bursa.client.Client</mainClass>
+                            <mainClass>com.bursa.client.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
