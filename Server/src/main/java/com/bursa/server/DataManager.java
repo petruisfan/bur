@@ -25,9 +25,10 @@ public interface DataManager {
 	/**
 	 * Modify an existing share.
 	 * @param share
+	 * @param oldShare 
 	 * @return
 	 */
-	public boolean modifyShare(Offer share, int id) ;
+	public boolean modifyShare(Offer newShare, Offer oldShare, int id) ;
 
 	/**
 	 * Get a list of the last 15 transactions;

@@ -1,7 +1,11 @@
 package com.bursa.interfata;
 
-public class Offer {
-	
+import java.io.Serializable;
+import java.security.InvalidParameterException;
+
+public class Offer implements Serializable{
+	private static final long serialVersionUID = 933734879983461281L;
+
 	public enum OfferType {
 		SELL,
 		BUY
@@ -37,7 +41,12 @@ public class Offer {
 	public String getCompany() {
 		return company;
 	}
-
+	
+	public void decrease(int quantity){
+		if(quantity>number)
+			throw new InvalidParameterException("Quantity larger than number");
+		number -= quantity;
+	}
 
 	public int getNumber() {
 		return number;
@@ -52,6 +61,22 @@ public class Offer {
 		String result = "";
 		result += this.type + " " + this.company + " " + this.number + " " + this.value;
 		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Offer))
+			return false;
+		
+		Offer offer = (Offer)obj;
+		
+		if(offer.getCompany().equals(this.company) &&
+				offer.getNumber()==this.number &&
+				offer.getValue()==this.value &&
+				offer.getType().equals(this.type))
+		return true;
+		
+		return false;
 	}
 	
 }

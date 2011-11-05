@@ -19,6 +19,10 @@ public class OfferWrapper {
 		}
 	}
 	
+	public void setShare(Offer share){
+		this.share=share;
+	}
+	
 	public int getId() {
 		return shareId;
 	}
@@ -30,5 +34,9 @@ public class OfferWrapper {
 	public OfferType getType() {
 		OfferType result = share.getType();
 		return result;
+	}
+	
+	public int getClientId(){
+		return clientId;
 	}
 }

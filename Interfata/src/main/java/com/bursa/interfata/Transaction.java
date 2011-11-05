@@ -1,6 +1,10 @@
 package com.bursa.interfata;
 
-public class Transaction {
+import java.io.Serializable;
+
+public class Transaction implements Serializable {
+	private static final long serialVersionUID = 76789037759155600L;
+
 	private int sellerId = 0;			// who is the seller
 	private int buyerId = 0;			// who is the buyer
 	private String company = "";		// for what company

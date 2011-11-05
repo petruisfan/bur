@@ -21,10 +21,61 @@ public class MemoryDataManager implements DataManager {
 		this.transactions = new ArrayList<TransactionWrapper>();
 	}
 	
+	private void checkMatchingTransaction(OfferWrapper o){
+		for(OfferWrapper offer:shares){
+			if(offer.getType()==OfferType.SELL &&
+					o.getType()==OfferType.BUY &&
+					offer.getShare().getCompany().equals(o.getShare().getCompany()) &&
+					offer.getShare().getValue()<=o.getShare().getValue()){
+				//aici sync
+				int quantity = offer.getShare().getNumber()>o.getShare().getNumber()?o.getShare().getNumber():offer.getShare().getNumber();
+				Transaction t = new Transaction(offer.getClientId(), o.getClientId(), 
+						o.getShare().getCompany(), 
+						offer.getShare().getValue(),
+						quantity);
+				TransactionWrapper tw = new TransactionWrapper(t);
+
+				transactions.add(tw);
+				
+				offer.getShare().decrease(quantity);
+				o.getShare().decrease(quantity);
+				if(o.getShare().getNumber()==0)
+					shares.remove(o);
+				else if(offer.getShare().getNumber()==0)
+					shares.remove(offer);
+				else
+					throw new IllegalStateException("You shouldn't see this!");
+			}
+			if(offer.getType()==OfferType.BUY &&
+					o.getType()==OfferType.SELL &&
+					offer.getShare().getCompany().equals(o.getShare().getCompany()) &&
+					offer.getShare().getValue()>=o.getShare().getValue()){
+				//aici sync
+				int quantity = offer.getShare().getNumber()>o.getShare().getNumber()?o.getShare().getNumber():offer.getShare().getNumber();
+				Transaction t = new Transaction(o.getClientId(), offer.getClientId(), 
+						o.getShare().getCompany(), 
+						o.getShare().getValue(),
+						quantity);
+				TransactionWrapper tw = new TransactionWrapper(t);
+				
+				transactions.add(tw);
+
+				offer.getShare().decrease(quantity);
+				o.getShare().decrease(quantity);
+				if(o.getShare().getNumber()==0)
+					shares.remove(o);
+				else if(offer.getShare().getNumber()==0)
+					shares.remove(offer);
+				else
+					throw new IllegalStateException("You shouldn't see this!");
+			}
+		}
+	}
 	
 	public boolean addShare(Offer share, int id) {
 		OfferWrapper newShare = new OfferWrapper(share, id);
 		boolean result = shares.add(newShare);
+		checkMatchingTransaction(newShare);
 		return result;
 	}
 
@@ -44,8 +95,15 @@ public class MemoryDataManager implements DataManager {
 	}
 
 	
-	public boolean modifyShare(Offer share, int id) {
-		// TODO Auto-generated method stub
+	public boolean modifyShare(Offer newShare, Offer oldShare, int id) {
+		for(OfferWrapper s:shares){
+			if(s.getClientId()==id){
+				if(s.getShare().equals(oldShare)){
+					s.setShare(newShare);
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -53,7 +111,7 @@ public class MemoryDataManager implements DataManager {
 	public ArrayList<Transaction> getTransactions(int transactionCount) {
 		ArrayList<Transaction> result = new ArrayList<Transaction>();
 		
-		for (int i=transactions.size()-1, j=0; i>0 && j<transactionCount; j++, i--) {
+		for (int i=transactions.size()-1, j=0; i>=0 && j<transactionCount; j++, i--) {
 			Transaction tr = transactions.get(i).getTransaction();
 			result.add (tr);
 		}

@@ -32,8 +32,8 @@ public class ComunicationServer extends UnicastRemoteObject implements StockServ
 		return result;
 	}
 
-	public boolean modifyShare(Offer share) throws RemoteException {
-		boolean result = dm.modifyShare(share, id);
+	public boolean modifyShare(Offer newShare, Offer oldShare) throws RemoteException {
+		boolean result = dm.modifyShare(newShare, oldShare, id);
 		return result;
 	}
 
