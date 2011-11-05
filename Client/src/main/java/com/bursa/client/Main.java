@@ -9,8 +9,6 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import javax.security.auth.login.CredentialException;
-
 import com.bursa.client.gui.MainFrame;
 import com.bursa.interfata.Connector;
 import com.bursa.interfata.Offer;
@@ -24,11 +22,7 @@ public class Main {
 	private int transactionCount = 15;
 
 	public static void main(String[] args) {
-		if (args.length == 0 || args[0].equals("-g")) {
-			MainFrame frame = new MainFrame();
-			frame.setVisible(true);
-		} 
-		else if (args[0].equals("-c")){
+		if (args.length == 0 || args[0].equals("-c")) {
 			Main m = new Main();
 			try {
 				m.startCommandMode();
@@ -38,9 +32,11 @@ public class Main {
 				e.printStackTrace();
 			} catch (NotBoundException e) {
 				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
 			}
+		} 
+		else if (args[0].equals("-g")){
+			MainFrame frame = new MainFrame();
+			frame.setVisible(true);			
 		}
 
 
@@ -151,15 +147,19 @@ public class Main {
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
-			System.out.print("Buy or sell shares? ");
-			offer = input.readLine();
-			
-			if (offer.equals("SELL")) {
-				ot = OfferType.SELL;
-			} else if (offer.equals("BUY")) {
-				ot = OfferType.BUY;
-			}
+			while (true) {
+				System.out.print("Buy or sell shares? ");
+				offer = input.readLine();
 
+				if (offer.equalsIgnoreCase("SELL")) {
+					ot = OfferType.SELL;
+					break;
+				} else if (offer.equalsIgnoreCase("BUY")) {
+					ot = OfferType.BUY;
+					break;
+				} 
+			}
+			
 			System.out.print("Company: ");
 			company = input.readLine();
 			
