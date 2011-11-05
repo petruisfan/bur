@@ -20,7 +20,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.bursa.MainServer</mainClass>
+                            <mainClass>com.bursa.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
