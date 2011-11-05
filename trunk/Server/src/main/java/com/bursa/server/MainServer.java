@@ -50,7 +50,7 @@ public class MainServer extends UnicastRemoteObject implements Connector {
 	}
 
 	public boolean disconnect() throws RemoteException {
-		// TODO Auto-generated method stub
+		//TODO
 		return false;
 	}
 

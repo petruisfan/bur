@@ -33,7 +33,7 @@ public interface StockServer extends Remote{
      * @return
      * @throws RemoteException
      */
-    public boolean modifyShare(Offer share) throws RemoteException;
+    public boolean modifyShare(Offer newShare, Offer oldShare) throws RemoteException;
     
     /**
      * Return a list of the last 15 transactions

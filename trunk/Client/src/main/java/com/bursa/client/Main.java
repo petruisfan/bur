@@ -99,6 +99,7 @@ public class Main {
 					break;
 				case 't':
 					this.printLast15Transactions();
+					break;
 				case 'h': 
 					printHelpMenu(); 
 					break;
@@ -107,6 +108,7 @@ public class Main {
 					
 					Thread.sleep(500);
 					
+					server=null;
 					RMIserver.disconnect();
 					System.exit(0);
 				}
@@ -172,8 +174,7 @@ public class Main {
 			server.postShare(offerObj);
 			
 			System.out.println("Done!");
-
-			System.out.println("Invalid values.");
+			
 		}catch(RemoteException r){
 			System.out.println("Remote Exception");
 			r.printStackTrace();
@@ -183,7 +184,7 @@ public class Main {
 	}
 
 	private void printLast15Transactions() {
-		System.out.println("Last 15 transactions: TODO");
+		System.out.println("Last transactions: ");
 		
 		ArrayList<Transaction> trans = null;
 		try {
