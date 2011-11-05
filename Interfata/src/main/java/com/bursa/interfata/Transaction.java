@@ -44,5 +44,11 @@ public class Transaction {
 		return number;
 	}
 
-	
+	public String toString() {
+		String result = "";
+		
+		result += sellerId + " " + buyerId + " " + company + " " + value + " " + number;
+		
+		return result;
+	}
 }

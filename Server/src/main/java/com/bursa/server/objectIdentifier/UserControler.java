@@ -1,6 +1,6 @@
 package com.bursa.server.objectIdentifier;
 
-public class UserIdentifier {
+public class UserControler {
 
 	// name password id
 	private static final String[][] credentials = {

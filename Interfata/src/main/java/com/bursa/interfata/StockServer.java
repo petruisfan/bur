@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import com.bursa.interfata.Share.OfferType;
+import com.bursa.interfata.Offer.OfferType;
 
 
 public interface StockServer extends Remote{
@@ -17,7 +17,7 @@ public interface StockServer extends Remote{
      * @return
      * @throws RemoteException
      */
-    public boolean postShare(Share share) throws RemoteException;
+    public boolean postShare(Offer share) throws RemoteException;
     
     /**
      * Get a list of the current share actions.
@@ -25,7 +25,7 @@ public interface StockServer extends Remote{
      * @return
      * @throws RemoteException
      */
-    public ArrayList<Share> getShares(OfferType type) throws RemoteException;
+    public ArrayList<Offer> getShares(OfferType type) throws RemoteException;
     
     /**
      * Modify the share object on the server
@@ -33,12 +33,12 @@ public interface StockServer extends Remote{
      * @return
      * @throws RemoteException
      */
-    public boolean modifyShare(Share share) throws RemoteException;
+    public boolean modifyShare(Offer share) throws RemoteException;
     
     /**
      * Return a list of the last 15 transactions
      * @return
      * @throws RemoteException
      */
-    public ArrayList<Transaction> getTransaction() throws RemoteException; 
+    public ArrayList<Transaction> getTransaction(int transactionCount) throws RemoteException; 
 }

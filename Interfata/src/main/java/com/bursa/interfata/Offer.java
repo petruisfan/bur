@@ -1,6 +1,6 @@
 package com.bursa.interfata;
 
-public class Share {
+public class Offer {
 	
 	public enum OfferType {
 		SELL,
@@ -13,7 +13,7 @@ public class Share {
 	private int value = -1;			// the value of one share
 	
 
-	public Share(OfferType type, String company, int number, int value) {
+	public Offer(OfferType type, String company, int number, int value) {
 		if (number <= 0 || 
 				value <= 0 || 
 				type == null || 
@@ -48,6 +48,10 @@ public class Share {
 		return value;
 	}
 
-
+	public String toString() {
+		String result = "";
+		result += this.type + " " + this.company + " " + this.number + " " + this.value;
+		return result;
+	}
 	
 }

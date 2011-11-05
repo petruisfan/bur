@@ -1,30 +1,29 @@
 package com.bursa.server.objectIdentifier;
 
-import com.bursa.interfata.Share;
-import com.bursa.interfata.Share.OfferType;
+import com.bursa.interfata.Offer;
+import com.bursa.interfata.Offer.OfferType;
 
-public class ShareIdentifier {
-	private Share share;
+public class OfferWrapper {
+	private Offer share;
 	
 	private static int id = 0;	// the id of the last share action
 	private final int shareId;	// unique id for each share action
 	private int clientId;		// who is selling/ buying
 	
-	public ShareIdentifier(Share s, int id2) {
+	public OfferWrapper(Offer s, int id2) {
 		this.share = s;
 		this.clientId = id2;
-		shareId = incrementId(); 
+		shareId = ++id;
+		if (id > Integer.MAX_VALUE-5) {
+			System.out.println("Id reseting");
+		}
 	}
 	
-	private static int incrementId(){
-		return ++id;
-	}
-
 	public int getId() {
 		return shareId;
 	}
 
-	public Share getShare() {
+	public Offer getShare() {
 		return share;
 	}
 

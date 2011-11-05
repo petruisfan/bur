@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.bursa.interfata.Share;
-import com.bursa.interfata.Share.OfferType;
+import com.bursa.interfata.Offer;
+import com.bursa.interfata.Offer.OfferType;
 import com.bursa.interfata.Transaction;
 
 public class MemoryDataManagerTest {
@@ -21,17 +21,17 @@ public class MemoryDataManagerTest {
 	
 	@Test
 	public void testGetShares() {
-		Share share1 = new Share(OfferType.BUY, "name", 10, 3);
-		Share share2 = new Share(OfferType.BUY, "asda", 44, 9);
-		Share share3 = new Share(OfferType.SELL, "valies", 10, 3);
-		Share share4 = new Share(OfferType.BUY, "company", 10, 3);
+		Offer share1 = new Offer(OfferType.BUY, "name", 10, 3);
+		Offer share2 = new Offer(OfferType.BUY, "asda", 44, 9);
+		Offer share3 = new Offer(OfferType.SELL, "valies", 10, 3);
+		Offer share4 = new Offer(OfferType.BUY, "company", 10, 3);
 		
 		dm.addShare(share1, 10);
 		dm.addShare(share2, 10);
 		dm.addShare(share3, 10);
 		dm.addShare(share4, 10);
 		
-		ArrayList<Share> result = dm.getShares(OfferType.BUY);
+		ArrayList<Offer> result = dm.getShares(OfferType.BUY);
 		
 		
 		assertEquals(result.size(),3);
@@ -43,7 +43,7 @@ public class MemoryDataManagerTest {
 	
 	@Test
 	public void testGetSharesNull() {
-		ArrayList<Share> result = dm.getShares(OfferType.BUY);
+		ArrayList<Offer> result = dm.getShares(OfferType.BUY);
 		
 		assertEquals(result.size(),0);
 	}
@@ -57,7 +57,7 @@ public class MemoryDataManagerTest {
 			dm.addTransaction(tran);
 		}
 		
-		ArrayList<Transaction> result = dm.getTransactions();
+		ArrayList<Transaction> result = dm.getTransactions(15);
 		
 		assertEquals(result.size(),15);
 
@@ -69,7 +69,7 @@ public class MemoryDataManagerTest {
 	
 	@Test
 	public void testGetTransactionNull() {
-		ArrayList<Transaction> result = dm.getTransactions();
+		ArrayList<Transaction> result = dm.getTransactions(15);
 		
 		assertEquals(result.size(),0);
 	}
