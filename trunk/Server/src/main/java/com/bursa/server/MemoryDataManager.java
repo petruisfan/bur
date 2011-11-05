@@ -2,40 +2,37 @@ package com.bursa.server;
 
 import java.util.ArrayList;
 
-import com.bursa.interfata.Share;
-import com.bursa.interfata.Share.OfferType;
+import com.bursa.interfata.Offer;
+import com.bursa.interfata.Offer.OfferType;
 import com.bursa.interfata.Transaction;
-import com.bursa.server.objectIdentifier.ShareIdentifier;
-import com.bursa.server.objectIdentifier.TransactionIdentifier;
+import com.bursa.server.objectIdentifier.OfferWrapper;
+import com.bursa.server.objectIdentifier.TransactionWrapper;
 
 /**
  * Simulates the actions using objects from memory;
  * @author petre
  */
 public class MemoryDataManager implements DataManager {
-	private ArrayList<ShareIdentifier> shares;
-	private ArrayList<TransactionIdentifier> transactions;
-	
-	// how many transactions does getTransaction() return.
-	private int transactionCount = 15;
+	private ArrayList<OfferWrapper> shares;
+	private ArrayList<TransactionWrapper> transactions;
 	
 	public MemoryDataManager() {
-		this.shares = new ArrayList<ShareIdentifier>();
-		this.transactions = new ArrayList<TransactionIdentifier>();
+		this.shares = new ArrayList<OfferWrapper>();
+		this.transactions = new ArrayList<TransactionWrapper>();
 	}
 	
 	
-	public boolean addShare(Share share, int id) {
-		ShareIdentifier newShare = new ShareIdentifier(share, id);
+	public boolean addShare(Offer share, int id) {
+		OfferWrapper newShare = new OfferWrapper(share, id);
 		boolean result = shares.add(newShare);
 		return result;
 	}
 
 	
-	public ArrayList<Share> getShares(OfferType type) {
-		ArrayList<Share> result = new ArrayList<Share>();
+	public ArrayList<Offer> getShares(OfferType type) {
+		ArrayList<Offer> result = new ArrayList<Offer>();
 		
-		for (ShareIdentifier s:shares) {
+		for (OfferWrapper s:shares) {
 			OfferType offer = s.getType();
 			
 			if (offer.compareTo(type) == 0) {
@@ -47,13 +44,13 @@ public class MemoryDataManager implements DataManager {
 	}
 
 	
-	public boolean modifyShare(Share share, int id) {
+	public boolean modifyShare(Offer share, int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	
-	public ArrayList<Transaction> getTransactions() {
+	public ArrayList<Transaction> getTransactions(int transactionCount) {
 		ArrayList<Transaction> result = new ArrayList<Transaction>();
 		
 		for (int i=transactions.size()-1, j=0; i>0 && j<transactionCount; j++, i--) {
@@ -68,7 +65,7 @@ public class MemoryDataManager implements DataManager {
 	public boolean addTransaction(Transaction t) {
 		boolean result = false;
 		
-		TransactionIdentifier tran = new TransactionIdentifier(t);
+		TransactionWrapper tran = new TransactionWrapper(t);
 		result = transactions.add(tran);
 		
 		return result;

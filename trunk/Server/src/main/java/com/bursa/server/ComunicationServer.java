@@ -5,8 +5,8 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import com.bursa.interfata.StockServer;
-import com.bursa.interfata.Share;
-import com.bursa.interfata.Share.OfferType;
+import com.bursa.interfata.Offer;
+import com.bursa.interfata.Offer.OfferType;
 import com.bursa.interfata.Transaction;
 
 public class ComunicationServer extends UnicastRemoteObject implements StockServer{
@@ -22,23 +22,23 @@ public class ComunicationServer extends UnicastRemoteObject implements StockServ
         this.id = id2;
     }
 
-	public boolean postShare(Share share) throws RemoteException {
+	public boolean postShare(Offer share) throws RemoteException {
 		boolean result = dm.addShare(share, id);
 		return result;
 	}
 
-	public ArrayList<Share> getShares(OfferType type) throws RemoteException {
-		ArrayList<Share> result = dm.getShares(type);
+	public ArrayList<Offer> getShares(OfferType type) throws RemoteException {
+		ArrayList<Offer> result = dm.getShares(type);
 		return result;
 	}
 
-	public boolean modifyShare(Share share) throws RemoteException {
+	public boolean modifyShare(Offer share) throws RemoteException {
 		boolean result = dm.modifyShare(share, id);
 		return result;
 	}
 
-	public ArrayList<Transaction> getTransaction() throws RemoteException {
-		ArrayList<Transaction> result = dm.getTransactions();
+	public ArrayList<Transaction> getTransaction(int transactionCount) throws RemoteException {
+		ArrayList<Transaction> result = dm.getTransactions(transactionCount);
 		return result;
 	}
     

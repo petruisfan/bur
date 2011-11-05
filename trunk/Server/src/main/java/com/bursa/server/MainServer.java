@@ -7,7 +7,7 @@ import javax.security.auth.login.CredentialException;
 
 import com.bursa.interfata.Connector;
 import com.bursa.interfata.StockServer;
-import com.bursa.server.objectIdentifier.UserIdentifier;
+import com.bursa.server.objectIdentifier.UserControler;
 
 /**
  * Use this to connect to the server and receive a server thread.
@@ -41,7 +41,7 @@ public class MainServer extends UnicastRemoteObject implements Connector {
 			throw new CredentialException(); 
 		}
 		
-		int id = UserIdentifier.verifyCredentials(user, pass);
+		int id = UserControler.verifyCredentials(user, pass);
 		
 		if (id == -1) {
 			throw new CredentialException();

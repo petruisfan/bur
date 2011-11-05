@@ -14,7 +14,7 @@ public class Main {
             System.out.println("RMI registry started.");
             
             MainServer obj = new MainServer();
-            Naming.rebind("//localhost/HelloServer",obj);
+            Naming.rebind("//localhost/bursa",obj);
             System.out.println("Server bound in rmi registry");
             
         } catch (RemoteException e) {
