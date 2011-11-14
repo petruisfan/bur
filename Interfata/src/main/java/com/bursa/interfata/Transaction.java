@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Transaction implements Serializable {
 	private static final long serialVersionUID = 76789037759155600L;
 
-	private int sellerId = 0;			// who is the seller
-	private int buyerId = 0;			// who is the buyer
-	private String company = "";		// for what company
-	private int value = 0;				// the value of one share
-	private int number = 0;				// the number of shares
+	private final int sellerId;			// who is the seller
+	private final int buyerId;			// who is the buyer
+	private final String company;		// for what company
+	private final int value;				// the value of one share
+	private final int number;				// the number of shares
 
 	
 	public Transaction(int sellerId, int buyerId, String company, int value,int number) {

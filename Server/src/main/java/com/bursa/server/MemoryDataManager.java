@@ -1,6 +1,7 @@
 package com.bursa.server;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 import com.bursa.interfata.Offer;
 import com.bursa.interfata.Offer.OfferType;
@@ -10,15 +11,14 @@ import com.bursa.server.objectIdentifier.TransactionWrapper;
 
 /**
  * Simulates the actions using objects from memory;
- * @author petre
  */
 public class MemoryDataManager implements DataManager {
 	private ArrayList<OfferWrapper> shares;
-	private ArrayList<TransactionWrapper> transactions;
+	private Vector<TransactionWrapper> transactions;
 	
 	public MemoryDataManager() {
 		this.shares = new ArrayList<OfferWrapper>();
-		this.transactions = new ArrayList<TransactionWrapper>();
+		this.transactions = new Vector<TransactionWrapper>();
 	}
 	
 	private void checkMatchingTransaction(OfferWrapper o){
@@ -27,7 +27,7 @@ public class MemoryDataManager implements DataManager {
 					o.getType()==OfferType.BUY &&
 					offer.getShare().getCompany().equals(o.getShare().getCompany()) &&
 					offer.getShare().getValue()<=o.getShare().getValue()){
-				//aici sync
+
 				int quantity = offer.getShare().getNumber()>o.getShare().getNumber()?o.getShare().getNumber():offer.getShare().getNumber();
 				Transaction t = new Transaction(offer.getClientId(), o.getClientId(), 
 						o.getShare().getCompany(), 
@@ -37,20 +37,28 @@ public class MemoryDataManager implements DataManager {
 
 				transactions.add(tw);
 				
-				offer.getShare().decrease(quantity);
-				o.getShare().decrease(quantity);
+				Offer o2 = offer.getShare().cloneWithOtherQuantity(quantity);
+				Offer o3 = o.getShare().cloneWithOtherQuantity(quantity);
+					
+				offer.setShare(o2);
+				o.setShare(o3);
+				
+				//offer.getShare().decrease(quantity);
+				//o.getShare().decrease(quantity);
+				
 				if(o.getShare().getNumber()==0)
 					shares.remove(o);
-				else if(offer.getShare().getNumber()==0)
+				if(offer.getShare().getNumber()==0)
 					shares.remove(offer);
-				else
+				if (!(o.getShare().getNumber()==0 || offer.getShare().getNumber()==0))
 					throw new IllegalStateException("You shouldn't see this!");
+				return;
 			}
 			if(offer.getType()==OfferType.BUY &&
 					o.getType()==OfferType.SELL &&
 					offer.getShare().getCompany().equals(o.getShare().getCompany()) &&
 					offer.getShare().getValue()>=o.getShare().getValue()){
-				//aici sync
+
 				int quantity = offer.getShare().getNumber()>o.getShare().getNumber()?o.getShare().getNumber():offer.getShare().getNumber();
 				Transaction t = new Transaction(o.getClientId(), offer.getClientId(), 
 						o.getShare().getCompany(), 
@@ -60,27 +68,34 @@ public class MemoryDataManager implements DataManager {
 				
 				transactions.add(tw);
 
-				offer.getShare().decrease(quantity);
-				o.getShare().decrease(quantity);
+				Offer o2 = offer.getShare().cloneWithOtherQuantity(quantity);
+				Offer o3 = o.getShare().cloneWithOtherQuantity(quantity);
+					
+				offer.setShare(o2);
+				o.setShare(o3);
+				
+				//offer.getShare().decrease(quantity);
+				//o.getShare().decrease(quantity);
+				
 				if(o.getShare().getNumber()==0)
 					shares.remove(o);
-				else if(offer.getShare().getNumber()==0)
+				if(offer.getShare().getNumber()==0)
 					shares.remove(offer);
-				else
+				if (!(o.getShare().getNumber()==0 || offer.getShare().getNumber()==0))
 					throw new IllegalStateException("You shouldn't see this!");
+				return;
 			}
 		}
 	}
 	
-	public boolean addShare(Offer share, int id) {
+	public synchronized boolean addShare(Offer share, int id) {
 		OfferWrapper newShare = new OfferWrapper(share, id);
 		boolean result = shares.add(newShare);
 		checkMatchingTransaction(newShare);
 		return result;
 	}
 
-	
-	public ArrayList<Offer> getShares(OfferType type) {
+	public synchronized ArrayList<Offer> getShares(OfferType type) {
 		ArrayList<Offer> result = new ArrayList<Offer>();
 		
 		for (OfferWrapper s:shares) {
@@ -93,9 +108,8 @@ public class MemoryDataManager implements DataManager {
 
 		return result;
 	}
-
 	
-	public boolean modifyShare(Offer newShare, Offer oldShare, int id) {
+	public synchronized boolean modifyShare(Offer newShare, Offer oldShare, int id) {
 		for(OfferWrapper s:shares){
 			if(s.getClientId()==id){
 				if(s.getShare().equals(oldShare)){
@@ -107,7 +121,9 @@ public class MemoryDataManager implements DataManager {
 		return false;
 	}
 
-	
+	/**
+	 * ThreadSafe because transaction is immutual.
+	 */
 	public ArrayList<Transaction> getTransactions(int transactionCount) {
 		ArrayList<Transaction> result = new ArrayList<Transaction>();
 		
@@ -119,7 +135,9 @@ public class MemoryDataManager implements DataManager {
 		return result;
 	}
 
-	
+	/**
+	 * ThreadSafe because vector is synchronized.
+	 */
 	public boolean addTransaction(Transaction t) {
 		boolean result = false;
 		
